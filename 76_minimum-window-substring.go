@@ -7,6 +7,8 @@ import (
 
 // https://leetcode.cn/problems/minimum-window-substring/
 
+// method: https://labuladong.github.io/algo/di-yi-zhan-da78c/shou-ba-sh-48c1d/wo-xie-le--f7a92/
+
 func minWindow(s string, t string) string {
 	targetMap := make(map[byte]int)
 	windowMap := make(map[byte]int)

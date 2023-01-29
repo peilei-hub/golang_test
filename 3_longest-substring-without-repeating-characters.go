@@ -2,7 +2,9 @@ package main
 
 // https://leetcode.cn/problems/longest-substring-without-repeating-characters/
 
-func lengthOfLongestSubstring(s string) int {
+// method: https://labuladong.github.io/algo/di-yi-zhan-da78c/shou-ba-sh-48c1d/wo-xie-le--f7a92/
+
+func lengthOfLongestSubstring1(s string) int {
 	if len(s) == 0 {
 		return 0
 	}
@@ -16,8 +18,6 @@ func lengthOfLongestSubstring(s string) int {
 		right++
 
 		if _, ok := byteSet[b]; ok {
-			max = intMax(max, len(byteSet))
-
 			for left < right-1 {
 				if bytes[left] == b {
 					left++
@@ -29,8 +29,9 @@ func lengthOfLongestSubstring(s string) int {
 			}
 		} else {
 			byteSet[b] = struct{}{}
-			max = intMax(max, len(byteSet))
 		}
+
+		max = intMax(max, len(byteSet))
 	}
 	return max
 }

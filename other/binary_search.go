@@ -32,9 +32,9 @@ func leftBound(nums []int, target int) int {
 			}
 			right = mid - 1 // 右区间缩小
 		} else if nums[mid] > target {
-			left = mid + 1
-		} else if nums[mid] < target {
 			right = mid - 1
+		} else if nums[mid] < target {
+			left = mid + 1
 		}
 	}
 

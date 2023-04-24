@@ -4,27 +4,26 @@ package main
 
 // method: https://labuladong.github.io/algo/di-yi-zhan-da78c/shou-ba-sh-48c1d/wo-xie-le--f7a92/
 
-func lengthOfLongestSubstring1(s string) int {
+func lengthOfLongestSubstring(s string) int {
 	if len(s) == 0 {
 		return 0
 	}
 
-	bytes := []byte(s)
 	byteSet := make(map[byte]struct{})
 	var left, right, max int
 
-	for right < len(bytes) {
-		b := bytes[right]
+	for right < len(s) {
+		b := s[right]
 		right++
 
 		if _, ok := byteSet[b]; ok {
 			for left < right-1 {
-				if bytes[left] == b {
+				if s[left] != b {
+					delete(byteSet, s[left])
 					left++
+				} else { // 一直找到相等的位置
+					left++ // 定位到相等的位置的下一位
 					break
-				} else {
-					delete(byteSet, bytes[left])
-					left++
 				}
 			}
 		} else {

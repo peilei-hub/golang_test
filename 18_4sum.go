@@ -2,6 +2,8 @@ package main
 
 import "sort"
 
+// https://leetcode.cn/problems/4sum/
+
 func fourSum(nums []int, target int) [][]int {
 	if len(nums) < 4 {
 		return nil

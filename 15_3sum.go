@@ -2,6 +2,8 @@ package main
 
 import "sort"
 
+// https://leetcode.cn/problems/3sum/
+
 func threeSum(nums []int) [][]int {
 	// 长度不到3位直接退出
 	if len(nums) < 3 {

@@ -2,6 +2,8 @@ package main
 
 import "math"
 
+// https://leetcode.cn/problems/reverse-integer/
+
 func reverse(x int) int {
 	res := 0
 	for x != 0 {

@@ -2,6 +2,8 @@ package main
 
 import "math"
 
+// https://leetcode.cn/problems/string-to-integer-atoi/
+
 func myAtoi(s string) int {
 	bytes := []byte(s)
 

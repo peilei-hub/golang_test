@@ -27,7 +27,7 @@ func leftBound(nums []int, target int) int {
 	for left <= right {
 		mid := left + (right-left)/2
 		if nums[mid] == target {
-			if mid == 0 || nums[mid-1] != target {
+			if mid == 0 || nums[mid-1] != target { // 判断是不是左边界
 				return mid
 			}
 			right = mid - 1 // 右区间缩小
@@ -48,7 +48,7 @@ func rightBound(nums []int, target int) int {
 	for left <= right {
 		mid := left + (right-left)/2
 		if nums[mid] == target {
-			if mid == len(nums)-1 || nums[mid+1] != target {
+			if mid == len(nums)-1 || nums[mid+1] != target { // 判断是不是右边界
 				return mid
 			}
 			left = mid + 1 // 左区间缩小

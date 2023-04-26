@@ -8,7 +8,7 @@ func convert(s string, numRows int) string {
 	}
 
 	res := make([][]byte, numRows)
-	for i := 0; i < len(res); i++ {
+	for i := range res {
 		res[i] = make([]byte, 0)
 	}
 

@@ -7,29 +7,26 @@ package main
  */
 
 func mergeTwoLists(list1 *ListNode, list2 *ListNode) *ListNode {
-	list1Temp := list1
-	list2Temp := list2
+	pre := &ListNode{}
+	tmp := pre
 
-	result := &ListNode{}
-	var cur = result
-	for list1Temp != nil && list2Temp != nil {
-		if list1Temp.Val < list2Temp.Val {
-			cur.Next = list1Temp
-			list1Temp = list1Temp.Next
+	for list1 != nil && list2 != nil {
+		if list1.Val < list2.Val {
+			tmp.Next = list1
+			list1 = list1.Next
 		} else {
-			cur.Next = list2Temp
-			list2Temp = list2Temp.Next
+			tmp.Next = list2
+			list2 = list2.Next
 		}
-		cur = cur.Next
+		tmp = tmp.Next
 	}
 
-	if list1Temp != nil {
-		cur.Next = list1Temp
+	if list1 != nil {
+		tmp.Next = list1
+	}
+	if list2 != nil {
+		tmp.Next = list2
 	}
 
-	if list2Temp != nil {
-		cur.Next = list2Temp
-	}
-
-	return result.Next
+	return pre.Next
 }

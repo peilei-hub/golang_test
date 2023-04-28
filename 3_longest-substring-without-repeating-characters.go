@@ -16,7 +16,9 @@ func lengthOfLongestSubstring(s string) int {
 		b := s[right]
 		right++
 
-		if _, ok := byteSet[b]; ok {
+		if _, ok := byteSet[b]; !ok {
+			byteSet[b] = struct{}{} // 没有就加进去
+		} else {
 			for left < right-1 {
 				if s[left] != b {
 					delete(byteSet, s[left])
@@ -26,8 +28,6 @@ func lengthOfLongestSubstring(s string) int {
 					break
 				}
 			}
-		} else {
-			byteSet[b] = struct{}{}
 		}
 
 		max = intMax(max, len(byteSet))

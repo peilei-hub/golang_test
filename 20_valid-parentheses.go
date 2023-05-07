@@ -2,6 +2,8 @@ package main
 
 // https://leetcode.cn/problems/valid-parentheses/
 
+// 思路，左括号入栈
+
 func isValid(s string) bool {
 	stack := make([]byte, 0)
 

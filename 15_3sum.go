@@ -4,6 +4,8 @@ import "sort"
 
 // https://leetcode.cn/problems/3sum/
 
+// 思路：for循环锚定第一个数，然后从第一个数后面，left right窗口缩小
+
 func threeSum(nums []int) [][]int {
 	// 长度不到3位直接退出
 	if len(nums) < 3 {

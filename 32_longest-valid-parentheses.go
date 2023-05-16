@@ -5,30 +5,26 @@ package main
 // 将左括号对应的下标入栈，维护一个validArray []bool 存储对应的下边括号是否有效
 
 func longestValidParentheses(s string) int {
-	stack := make([]int, 0)
-
 	validArray := make([]bool, len(s))
-	for i := range validArray { // 初始化
-		validArray[i] = true
+	for i := range validArray {
+		validArray[i] = true // 都初始化为true
 	}
 
+	stack := make([]int, 0)
 	for i, b := range s {
 		if b == '(' {
-			stack = append(stack, i) // 左括号，将下标入栈
-		} else { // b = ')'
-			if len(stack) == 0 {
-				validArray[i] = false // 如果栈为空，表示里面没有左括号，对应的位置为无效括号
-				continue
+			stack = append(stack, i) // 将左括号下标入栈
+		} else { // b == ')'
+			if len(stack) == 0 { // 没有左括号能匹配
+				validArray[i] = false
+			} else {
+				stack = stack[:len(stack)-1] // 出栈一个
 			}
-
-			stack = stack[:len(stack)-1] // 将一个左括号出栈，消耗一个左括号
 		}
 	}
 
-	for len(stack) > 0 { // 栈里多的左括号，对应的位置都为无效括号
-		i := stack[len(stack)-1]
-		validArray[i] = false
-		stack = stack[:len(stack)-1]
+	for _, n := range stack {
+		validArray[n] = false // 还在栈里的是没有匹配的左括号
 	}
 
 	max := 0

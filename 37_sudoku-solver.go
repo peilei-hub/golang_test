@@ -22,6 +22,7 @@ func solveSudoku(board [][]byte) {
 		result = append(result, make([]byte, 9))
 	}
 
+	// 一格一格的遍历
 	// 从row遍历，每次column+1，判断边界值和终止值
 	backtrace37(selectedNums, &board, 0, 0, &rowExist, &columnExist, &blockExist, &result)
 

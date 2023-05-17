@@ -37,8 +37,8 @@ func nextPermutation(nums []int) {
 		}
 	}
 
-	swapNums(nums, l, r)                // 交换
-	reverseNums(nums, l+1, len(nums)-1) // 将l+1开始后面的反转
+	swapNums(nums, l, r)              // 交换
+	reverseNums(nums, m, len(nums)-1) // 将m开始的反转
 }
 
 func swapNums(nums []int, i, j int) {

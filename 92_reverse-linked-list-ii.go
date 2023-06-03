@@ -8,14 +8,14 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	leftNode := head
 	rightNode := head
 
-	pre := &ListNode{}
-	pre.Next = head
-	res := pre
+	leftPre := &ListNode{}
+	leftPre.Next = head
+	res := leftPre
 	for i := 0; i < left-1; i++ { // pre为left的前驱节点
 		if leftNode == nil {
 			return head
 		}
-		pre = pre.Next
+		leftPre = leftPre.Next
 		leftNode = leftNode.Next
 	}
 
@@ -28,7 +28,7 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 
 	h := reverse92(leftNode, rightNode) // 返回后h为翻转部分的头，leftNode为翻转的尾部
 
-	pre.Next = h
+	leftPre.Next = h
 	leftNode.Next = rightNode
 
 	return res.Next

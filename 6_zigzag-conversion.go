@@ -16,7 +16,7 @@ func convert(s string, numRows int) string {
 	reverse := -1
 	for _, v := range s {
 		if row == numRows-1 || row == 0 {
-			reverse *= -1
+			reverse *= -1 // 翻转
 		}
 
 		res[row] = append(res[row], byte(v))

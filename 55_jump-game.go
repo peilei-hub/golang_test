@@ -6,9 +6,9 @@ func canJump(nums []int) bool {
 	nextBorder := 0
 	curBorder := 0
 	for i := 0; i < len(nums)-1; i++ {
-		nextBorder = max55(nextBorder, nums[i]+i)
+		nextBorder = max55(nextBorder, nums[i]+i) // 在当前border内去找下次的border
 
-		if i == curBorder {
+		if i == curBorder { // 到达当前border
 			if curBorder == nextBorder {
 				return false
 			}

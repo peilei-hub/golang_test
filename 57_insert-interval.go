@@ -16,13 +16,13 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 
 		curLeft, curRight := interval[0], interval[1]
 
-		if curRight < left {
+		if curRight < left { // 如果curRight < left, 还没到newInterval的范围, 那直接加进去
 			result = append(result, []int{curLeft, curRight})
-		} else if curLeft > right {
-			result = append(result, []int{left, right})
+		} else if curLeft > right { // 如果curLeft > right，即刚过newInterval的范围
+			result = append(result, []int{left, right}) // 将left right加进去，并设置加入flag。
 			added = true
 			result = append(result, []int{curLeft, curRight})
-		} else {
+		} else { // 如果 curLeft <= right && curRight >= left
 			left = min57(left, curLeft)
 			right = max57(right, curRight)
 		}

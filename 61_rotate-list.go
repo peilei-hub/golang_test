@@ -4,6 +4,7 @@ package main
 
 // 1. 注意链表为空，k=0
 // 2. 注意k大于链表长度，需要取模
+// 3. 找到tail节点 倒数第k节点的前驱节点
 
 func rotateRight(head *ListNode, k int) *ListNode {
 	if head == nil || k == 0 {
@@ -34,7 +35,7 @@ func rotateRight(head *ListNode, k int) *ListNode {
 	}
 
 	kNode := kPre.Next // 倒数第k个结点，为新的头结点
-	kPre.Next = nil
+	kPre.Next = nil    // kPre为尾节点
 	tail.Next = head
 
 	return kNode

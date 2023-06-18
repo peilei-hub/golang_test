@@ -5,7 +5,7 @@ import "sort"
 // https://leetcode.cn/problems/merge-intervals/
 
 func merge56(intervals [][]int) [][]int {
-	if len(intervals) == 0 || len(intervals) == 1 {
+	if len(intervals) <= 1 {
 		return intervals
 	}
 	result := make([][]int, 0)

@@ -9,7 +9,7 @@ func maxSubArray(nums []int) int {
 	for _, num := range nums {
 		if sum > 0 {
 			sum += num
-		} else {
+		} else { // sum <= 0时，将sum更新为num
 			sum = num
 		}
 

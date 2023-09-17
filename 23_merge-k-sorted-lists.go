@@ -1,5 +1,6 @@
 package main
 
+// kn * log(k)  k 为列表个数，n 为长度
 func mergeKLists(lists []*ListNode) *ListNode {
 	return mergeHelper(lists, 0, len(lists)-1)
 }

@@ -10,63 +10,57 @@ import (
 // method: https://labuladong.github.io/algo/di-yi-zhan-da78c/shou-ba-sh-48c1d/wo-xie-le--f7a92/
 
 func minWindow(s string, t string) string {
-	targetMap := make(map[byte]int)
-	windowMap := make(map[byte]int)
-
-	tBytes := []byte(t)
-	for _, b := range tBytes {
-		if _, ok := targetMap[b]; ok {
-			targetMap[b]++
-		} else {
-			targetMap[b] = 1
-		}
+	target := make(map[byte]int) // 目标包含的每个字符出现的次数
+	for _, i := range t {
+		target[byte(i)] += 1
 	}
 
-	bytes := []byte(s)
+	window := make(map[byte]int)
+	left, right, validNum := 0, 0, 0
 
-	var left, right, start, validNum int
-	minLength := math.MaxInt
-	for right < len(bytes) {
-		b := bytes[right]
+	start := 0
+	minLen := math.MaxInt
+
+	for right < len(s) {
+		b := s[right]
 		right++
 
-		if _, ok := targetMap[b]; !ok {
+		// b 不在目标里，直接跳过
+		if _, ok := target[b]; !ok {
 			continue
-		} else {
-			if _, ok := windowMap[b]; ok {
-				windowMap[b]++
-			} else {
-				windowMap[b] = 1
-			}
-			if windowMap[b] == targetMap[b] {
-				validNum++
-			}
 		}
 
-		for validNum == len(targetMap) {
+		window[b] += 1
+		if target[b] == window[b] { // 相等则有效数加1
+			validNum++
+		}
+
+		// 处理符合条件的情况，此时要缩小区间
+		for validNum == len(target) {
 			length := right - left
-			if length < minLength {
+			if length < minLen {
 				start = left
-				minLength = length
+				minLen = length
 			}
 
-			leftVal := bytes[left]
+			leftVal := s[left]
 			left++
 
-			if v, ok := windowMap[leftVal]; ok {
-				windowMap[leftVal] = v - 1
-				if windowMap[leftVal] < targetMap[leftVal] {
+			if v, ok := window[leftVal]; ok {
+				window[leftVal] = v - 1
+
+				if window[leftVal] < target[leftVal] {
 					validNum--
 				}
 			}
 		}
 	}
 
-	if minLength == math.MaxInt {
+	if minLen == math.MaxInt {
 		return ""
 	}
 
-	return s[start : start+minLength]
+	return s[start : start+minLen]
 }
 
 func main() {

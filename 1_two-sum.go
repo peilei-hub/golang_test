@@ -14,7 +14,7 @@ func twoSum1(nums []int, target int) []int {
 }
 
 func twoSum2(nums []int, target int) []int {
-	numMap := make(map[int]int)
+	numMap := make(map[int]int) // key 为 num, value 为 num 对应的下标
 	for i, num := range nums {
 		if v, ok := numMap[target-num]; ok {
 			return []int{i, v}

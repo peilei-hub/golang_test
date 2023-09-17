@@ -1,5 +1,7 @@
 package main
 
+import "wangpeilei/leetcode/utils"
+
 // https://leetcode.cn/problems/container-with-most-water/
 
 // 若向内 移动短板 ，水槽的短板可能变大，因此下个水槽的面积 可能增大 。
@@ -11,7 +13,7 @@ func maxArea(height []int) int {
 
 	var max int
 	for left < right {
-		temp := minInt(height[left], height[right]) * (right - left)
+		temp := utils.Min(height[left], height[right]) * (right - left)
 		if temp > max {
 			max = temp
 		}
@@ -24,11 +26,4 @@ func maxArea(height []int) int {
 	}
 
 	return max
-}
-
-func minInt(a, b int) int {
-	if a >= b {
-		return b
-	}
-	return a
 }

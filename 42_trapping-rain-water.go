@@ -1,5 +1,7 @@
 package main
 
+import "wangpeilei/leetcode/utils"
+
 // https://leetcode.cn/problems/trapping-rain-water/
 
 func trap(height []int) int {
@@ -8,32 +10,18 @@ func trap(height []int) int {
 	rightMax := make([]int, len(height))
 
 	for i := 1; i < len(height); i++ {
-		leftMax[i] = max42(leftMax[i-1], height[i-1]) // 当前下标的左边最大值为："左边的左边的最大值"和"左边的高度"的最大值
+		leftMax[i] = utils.Max(leftMax[i-1], height[i-1]) // 当前下标的左边最大值为："左边的左边的最大值"和"左边的高度"两者的最大值
 	}
 	for i := len(height) - 2; i >= 0; i-- {
-		rightMax[i] = max42(rightMax[i+1], height[i+1])
+		rightMax[i] = utils.Max(rightMax[i+1], height[i+1]) // 当前下标的右边最大值为："右边的右边的最大值"和"右边的高度"两者的最大值
 	}
 
 	total := 0
-	for i := 1; i < len(height)-1; i++ {
-		tmp := min42(leftMax[i], rightMax[i]) - height[i]
+	for i := 1; i < len(height)-1; i++ { // 去掉头尾
+		tmp := utils.Min(leftMax[i], rightMax[i]) - height[i]
 		if tmp > 0 {
 			total += tmp
 		}
 	}
 	return total
-}
-
-func min42(a, b int) int {
-	if a > b {
-		return b
-	}
-	return a
-}
-
-func max42(a, b int) int {
-	if a > b {
-		return a
-	}
-	return b
 }

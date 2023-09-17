@@ -49,7 +49,7 @@ func binarySearch74(arrays []int, target int) bool {
 	return false
 }
 
-func searchRow74(matrix [][]int, colMax int, target int) int {
+func searchRow74(matrix [][]int, colMax int, target int) int { // 查找到可能存在的对应的行号
 	left := 0
 	right := len(matrix) - 1
 

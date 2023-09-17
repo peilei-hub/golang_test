@@ -17,8 +17,8 @@ func merge56(intervals [][]int) [][]int {
 	leftMin, rightMax := intervals[0][0], intervals[0][1]
 
 	for i := 1; i < len(intervals); i++ {
-		// // 如果左区间小于 rMaxVal，则一定能合并。此时更新rMaxVal
-		for i < len(intervals) && intervals[i][0] <= rightMax {
+		// // 如果左边界小于 rMaxVal，则一定能合并。此时更新rMaxVal
+		for i < len(intervals) && intervals[i][0] <= rightMax { // 左边界跟rightMax比较
 			rightMax = max56(rightMax, intervals[i][1])
 			i++
 		}

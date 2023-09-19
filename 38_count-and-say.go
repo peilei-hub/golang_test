@@ -17,22 +17,22 @@ func countAndSay(n int) string {
 	result := ""
 
 	// 然后对n-1的str进行描述
-	var tmp int
+	var count int
 	for i := range str {
 		if i == 0 {
-			tmp = 1
+			count = 1
 			continue
 		}
 
 		if str[i] == str[i-1] {
-			tmp++
+			count++
 		} else {
-			result += strconv.FormatInt(int64(tmp), 10) + string(str[i-1]) // 出现的次数 + 值
-			tmp = 1
+			result += strconv.FormatInt(int64(count), 10) + string(str[i-1]) // 出现的次数 + 值
+			count = 1
 		}
 	}
 
-	result += strconv.FormatInt(int64(tmp), 10) + string(str[len(str)-1]) // 最后一个数出现的次数 + 值
+	result += strconv.FormatInt(int64(count), 10) + string(str[len(str)-1]) // 最后一个数出现的次数 + 值
 
 	return result
 }

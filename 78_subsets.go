@@ -7,25 +7,23 @@ import "fmt"
 func subsets(nums []int) [][]int {
 	result := make([][]int, 0)
 
-	tmp := make([]int, 0)
-
-	traceback78(&result, nums, &tmp, 0)
+	traceback78(&result, nums, []int{}, 0)
 	return result
 }
 
-func traceback78(result *[][]int, nums []int, tmp *[]int, start int) {
-	cur := make([]int, len(*tmp))
-	for i, v := range *tmp {
+func traceback78(result *[][]int, nums []int, tmp []int, start int) {
+	cur := make([]int, len(tmp))
+	for i, v := range tmp {
 		cur[i] = v
 	}
 	*result = append(*result, cur)
 
 	for i := start; i < len(nums); i++ {
-		*tmp = append(*tmp, nums[i])
+		tmp = append(tmp, nums[i])
 
 		traceback78(result, nums, tmp, i+1)
 
-		*tmp = (*tmp)[:len(*(tmp))-1]
+		tmp = tmp[:len(tmp)-1]
 	}
 }
 

@@ -41,18 +41,18 @@ func addStr43(nums1 string, nums2 string) string {
 
 	carry := 0
 
-	len1 := len(nums1) - 1
-	len2 := len(nums2) - 1
+	idx1 := len(nums1) - 1
+	idx2 := len(nums2) - 1
 
-	for len1 >= 0 || len2 >= 0 {
+	for idx1 >= 0 || idx2 >= 0 {
 		var v1, v2 int
-		if len1 >= 0 {
-			v1 = int(nums1[len1] - '0')
-			len1--
+		if idx1 >= 0 {
+			v1 = int(nums1[idx1] - '0')
+			idx1--
 		}
-		if len2 >= 0 {
-			v2 = int(nums2[len2] - '0')
-			len2--
+		if idx2 >= 0 {
+			v2 = int(nums2[idx2] - '0')
+			idx2--
 		}
 
 		tmp := v1 + v2 + carry

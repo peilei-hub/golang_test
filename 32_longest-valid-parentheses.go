@@ -10,20 +10,20 @@ func longestValidParentheses(s string) int {
 		validArray[i] = true // 都初始化为true
 	}
 
-	stack := make([]int, 0)
+	notMatchIdxStack := make([]int, 0)
 	for i, b := range s {
 		if b == '(' {
-			stack = append(stack, i) // 将左括号下标入栈
+			notMatchIdxStack = append(notMatchIdxStack, i) // 将左括号下标入栈
 		} else { // b == ')'
-			if len(stack) == 0 { // 没有左括号能匹配
+			if len(notMatchIdxStack) == 0 { // 没有左括号能匹配
 				validArray[i] = false
 			} else {
-				stack = stack[:len(stack)-1] // 出栈一个
+				notMatchIdxStack = notMatchIdxStack[:len(notMatchIdxStack)-1] // 出栈一个
 			}
 		}
 	}
 
-	for _, n := range stack {
+	for _, n := range notMatchIdxStack {
 		validArray[n] = false // 还在栈里的是没有匹配的左括号
 	}
 

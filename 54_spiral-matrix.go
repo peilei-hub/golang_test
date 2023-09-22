@@ -4,6 +4,8 @@ import "fmt"
 
 // https://leetcode.cn/problems/spiral-matrix/
 
+//  每次都遍历到尽头
+
 func spiralOrder(matrix [][]int) []int {
 	rowMin := 0
 	columnMin := 0
@@ -21,13 +23,13 @@ func spiralOrder(matrix [][]int) []int {
 			result = append(result, matrix[i][columnMax])
 		}
 
-		if rowMin < rowMax {
+		if rowMin < rowMax { // 防止最有只有一行的情况
 			for i := columnMax - 1; i >= columnMin; i-- {
 				result = append(result, matrix[rowMax][i])
 			}
 		}
 
-		if columnMin < columnMax {
+		if columnMin < columnMax { // 防止最后只有一列的情况
 			for i := rowMax - 1; i > rowMin; i-- {
 				result = append(result, matrix[i][columnMin])
 			}

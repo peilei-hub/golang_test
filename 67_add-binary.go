@@ -14,9 +14,11 @@ func addBinary(a string, b string) string {
 		iVal, jVal := 0, 0
 		if i >= 0 {
 			iVal = int(a[i] - '0')
+			i--
 		}
 		if j >= 0 {
 			jVal = int(b[j] - '0')
+			j--
 		}
 
 		temp := iVal + jVal + carry
@@ -24,8 +26,6 @@ func addBinary(a string, b string) string {
 		temp %= 2
 
 		result = strconv.Itoa(temp) + result
-		i--
-		j--
 	}
 
 	if carry == 1 {

@@ -13,8 +13,8 @@ func jump(nums []int) int {
 	for i := 0; i < len(nums)-1; i++ {
 		nextBorder = max45(nextBorder, nums[i]+i) // 在当前border内去找下次的border
 		if i == curBorder {                       // 到达当前border
-			steps++
 			curBorder = nextBorder
+			steps++
 		}
 	}
 	return steps

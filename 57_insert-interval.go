@@ -2,6 +2,8 @@ package main
 
 // https://leetcode.cn/problems/insert-interval/
 
+//  判断没到范围 还是 刚过范围
+
 func insert(intervals [][]int, newInterval []int) [][]int {
 	result := make([][]int, 0)
 
@@ -28,7 +30,7 @@ func insert(intervals [][]int, newInterval []int) [][]int {
 		}
 	}
 
-	if !added {
+	if !added { // 没有加 说明最大，加到最后
 		result = append(result, []int{left, right})
 	}
 

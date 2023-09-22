@@ -18,10 +18,10 @@ func pow50(x float64, n int) float64 {
 
 	v := pow50(x, n/2)
 
-	if n%2 != 0 {
+	if n%2 != 0 { // 是奇数
 		return v * v * x
 	}
-	return v * v
+	return v * v // 是偶数
 }
 
 func myPow(x float64, n int) float64 {

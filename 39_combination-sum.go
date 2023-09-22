@@ -27,10 +27,8 @@ func traceback39(candidates []int, target int, result *[][]int, tmp []int, sum i
 
 	// sum < target
 	for i := begin; i < len(candidates); i++ {
-		candidate := candidates[i]
-
-		tmp = append(tmp, candidate)
-		traceback39(candidates, target, result, tmp, sum+candidate, i)
+		tmp = append(tmp, candidates[i])
+		traceback39(candidates, target, result, tmp, sum+candidates[i], i)
 
 		tmp = tmp[:len(tmp)-1]
 	}

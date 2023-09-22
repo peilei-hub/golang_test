@@ -5,7 +5,7 @@ import "fmt"
 // https://leetcode.cn/problems/n-queens/
 
 func solveNQueens(n int) [][]string {
-	tables := make([][]byte, 0, n)
+	tables := make([][]byte, 0, n) //  初始化
 	for i := 0; i < n; i++ {
 		row := make([]byte, n)
 		for j := 0; j < n; j++ {

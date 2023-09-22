@@ -3,14 +3,12 @@ package main
 // https://leetcode.cn/problems/maximum-subarray/
 
 func maxSubArray(nums []int) int {
-	max := nums[0]
-
-	sum := 0
-	for _, num := range nums {
+	var max, sum = nums[0], nums[0]
+	for i := 1; i < len(nums); i++ {
 		if sum > 0 {
-			sum += num
-		} else { // sum <= 0时，将sum更新为num
-			sum = num
+			sum += nums[i]
+		} else {
+			sum = nums[i]
 		}
 
 		max = max53(max, sum)

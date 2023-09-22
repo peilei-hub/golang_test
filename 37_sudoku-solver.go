@@ -1,12 +1,13 @@
 package main
 
+import "fmt"
+
 // https://leetcode.cn/problems/sudoku-solver/
 
 func solveSudoku(board [][]byte) {
 	var rowExist, columnExist, blockExist [9][10]bool // 用来存放每行、每列、每块的数字n是否已存在
-
-	for i, rows := range board {
-		for j, b := range rows {
+	for i, row := range board {
+		for j, b := range row {
 			if b != '.' {
 				tmp := b - '0'
 				rowExist[i][tmp] = true
@@ -16,16 +17,12 @@ func solveSudoku(board [][]byte) {
 		}
 	}
 
-	selectedNums := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
-	var result [][]byte
+	selections := []int{1, 2, 3, 4, 5, 6, 7, 8, 9}
+	var result [][]byte // 回溯后原本内容会被删除，需要保存下来结果
 	for i := 0; i < 9; i++ {
 		result = append(result, make([]byte, 9))
 	}
-
-	// 一格一格的遍历
-	// 从row遍历，每次column+1，判断边界值和终止值
-	backtrace37(selectedNums, &board, 0, 0, &rowExist, &columnExist, &blockExist, &result)
-
+	backtrace37(board, rowExist, columnExist, blockExist, 0, 0, selections, result)
 	for i, bytes := range result {
 		for j, b := range bytes {
 			board[i][j] = b
@@ -33,49 +30,44 @@ func solveSudoku(board [][]byte) {
 	}
 }
 
-func backtrace37(selectedNums []int, board *[][]byte, row, column int, rowExist, columnExist, blockExist *[9][10]bool, result *[][]byte) {
-	if column == 9 {
-		column = 0
-		row++
-		if row == 9 {
-			// 需要将结果存起来，因为回溯后会把状态删除
-			for i, bytes := range *board {
-				for j, b := range bytes {
-					(*result)[i][j] = b
+func backtrace37(board [][]byte, rowExist, columnExist, blockExist [9][10]bool, rowIdx, columnIdx int, selections []int, result [][]byte) {
+	if columnIdx == 9 {
+		rowIdx++
+		columnIdx = 0
+		if rowIdx == 9 { // 需要将结果存起来，因为回溯后会把状态删除
+			for i, row := range board {
+				for j, b := range row {
+					result[i][j] = b
 				}
 			}
 			return
 		}
 	}
 
-	rows := rowExist[row]
-	columns := columnExist[column]
-	blocks := blockExist[row/3*3+column/3]
+	b := board[rowIdx][columnIdx]
+	if b == '.' {
+		for _, num := range selections {
+			if isValid37(rowExist, columnExist, blockExist, rowIdx, columnIdx, num) { // 遍历所有有效的可能的组合
+				board[rowIdx][columnIdx] = byte(num + '0')
+				rowExist[rowIdx][num] = true
+				columnExist[columnIdx][num] = true
+				blockExist[rowIdx/3*3+columnIdx/3][num] = true
 
-	b := (*board)[row][column]
-	if b == '.' { // 不存在数字
-		for _, num := range selectedNums { // 需要对所有可能的结果进行遍历选择
-			if isValid37(rows, columns, blocks, num) {
-				(*board)[row][column] = byte(num + '0')
-				rowExist[row][num] = true
-				columnExist[column][num] = true
-				blockExist[row/3*3+column/3][num] = true
+				backtrace37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
 
-				backtrace37(selectedNums, board, row, column+1, rowExist, columnExist, blockExist, result)
-
-				(*board)[row][column] = '.'
-				rowExist[row][num] = false
-				columnExist[column][num] = false
-				blockExist[row/3*3+column/3][num] = false
+				board[rowIdx][columnIdx] = '.'
+				rowExist[rowIdx][num] = false
+				columnExist[columnIdx][num] = false
+				blockExist[rowIdx/3*3+columnIdx/3][num] = false
 			}
 		}
-	} else { // 当前已有数字，直接下一个格子
-		backtrace37(selectedNums, board, row, column+1, rowExist, columnExist, blockExist, result)
+	} else {
+		backtrace37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
 	}
 }
 
-func isValid37(rowExist, columnExist, blockExist [10]bool, num int) bool {
-	return !rowExist[num] && !columnExist[num] && !blockExist[num]
+func isValid37(rowExist [9][10]bool, columnExist [9][10]bool, blockExist [9][10]bool, rowIdx int, columnIdx int, num int) bool {
+	return !rowExist[rowIdx][num] && !columnExist[columnIdx][num] && !blockExist[rowIdx/3*3+columnIdx/3][num]
 }
 
 func main() {
@@ -92,4 +84,5 @@ func main() {
 	}
 
 	solveSudoku(board)
+	fmt.Println(board)
 }

@@ -23,20 +23,20 @@ func rotateRight(head *ListNode, k int) *ListNode {
 		return head
 	}
 
-	cur := head
+	temp := head
 	for i := 0; i < k; i++ {
-		cur = cur.Next
+		temp = temp.Next
 	}
 
 	kPre := head // 找到倒数第k个结点的前驱结点
-	for cur.Next != nil {
-		cur = cur.Next
+	for temp.Next != nil {
+		temp = temp.Next
 		kPre = kPre.Next
 	}
 
-	kNode := kPre.Next // 倒数第k个结点，为新的头结点
-	kPre.Next = nil    // kPre为尾节点
+	newHead := kPre.Next // 倒数第k个结点，为新的头结点
+	kPre.Next = nil      // kPre为尾节点
 	tail.Next = head
 
-	return kNode
+	return newHead
 }

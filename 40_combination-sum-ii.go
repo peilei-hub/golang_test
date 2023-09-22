@@ -29,15 +29,12 @@ func traceback40(candidates []int, result *[][]int, tmp []int, target int, sum i
 
 	// sum < target
 	for i := begin; i < len(candidates); i++ {
-		candidate := candidates[i]
 		if i > begin && candidates[i] == candidates[i-1] {
 			continue
 		}
 
-		tmp = append(tmp, candidate)
-
-		traceback40(candidates, result, tmp, target, sum+candidate, i+1)
-
+		tmp = append(tmp, candidates[i])
+		traceback40(candidates, result, tmp, target, sum+candidates[i], i+1)
 		tmp = tmp[:len(tmp)-1]
 	}
 }

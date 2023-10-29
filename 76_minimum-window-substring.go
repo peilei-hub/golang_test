@@ -21,7 +21,7 @@ func minWindow(s string, t string) string {
 	start := 0 // 结果的起始下标
 	minLen := math.MaxInt
 
-	for right < len(s) {
+	for right < len(s) { // 固定写法
 		b := s[right] // 固定写法
 		right++
 

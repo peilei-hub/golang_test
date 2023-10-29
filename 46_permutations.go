@@ -26,14 +26,16 @@ func traceback46(result *[][]int, tmp []int, nums []int, used []bool, idx int) {
 	}
 
 	for i, num := range nums {
-		if !used[i] {
-			used[i] = true
-			tmp[idx] = num
-
-			traceback46(result, tmp, nums, used, idx+1)
-
-			used[i] = false
+		if used[i] {
+			continue
 		}
+
+		used[i] = true
+		tmp[idx] = num
+
+		traceback46(result, tmp, nums, used, idx+1)
+
+		used[i] = false
 	}
 }
 

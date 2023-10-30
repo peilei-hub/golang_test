@@ -1,6 +1,9 @@
 package main
 
-import "strconv"
+import (
+	"fmt"
+	"strconv"
+)
 
 // https://leetcode.cn/problems/add-binary/
 
@@ -35,5 +38,6 @@ func addBinary(a string, b string) string {
 }
 
 func main() {
-	addBinary("1010", "1011")
+	binary := addBinary("1010", "1011")
+	fmt.Println(binary)
 }

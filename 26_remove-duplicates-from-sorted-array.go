@@ -14,3 +14,16 @@ func removeDuplicates(nums []int) int {
 
 	return idx + 1
 }
+
+func removeDuplicates1(nums []int) int {
+	idx := 1
+
+	for i := 1; i < len(nums); i++ {
+		if nums[idx-1] != nums[i] {
+			nums[idx] = nums[i]
+			idx++
+		}
+	}
+
+	return idx
+}

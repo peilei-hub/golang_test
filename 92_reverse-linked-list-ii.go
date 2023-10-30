@@ -5,8 +5,7 @@ import "fmt"
 // https://leetcode.cn/problems/reverse-linked-list-ii/
 
 func reverseBetween(head *ListNode, left int, right int) *ListNode {
-	leftNode := head
-	rightNode := head
+	leftNode, rightNode := head, head
 
 	leftPre := &ListNode{}
 	leftPre.Next = head

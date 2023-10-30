@@ -1,5 +1,7 @@
 package main
 
+import "fmt"
+
 // https://leetcode.cn/problems/combinations/
 
 func combine(n int, k int) [][]int {
@@ -12,7 +14,7 @@ func combine(n int, k int) [][]int {
 
 func traceback77(result *[][]int, n, k, idx, start int, tmp []int) {
 	if idx == k {
-		t := make([]int, len(tmp))
+		t := make([]int, k)
 		for i, v := range tmp {
 			t[i] = v
 		}
@@ -25,4 +27,9 @@ func traceback77(result *[][]int, n, k, idx, start int, tmp []int) {
 
 		traceback77(result, n, k, idx+1, i+1, tmp)
 	}
+}
+
+func main() {
+	res := combine(4, 2)
+	fmt.Println(res)
 }

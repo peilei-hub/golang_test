@@ -23,6 +23,8 @@ func traceback79(board [][]byte, visited [][]bool, i, j, rowLen, columnLen, step
 		return false
 	}
 
+	// board[i][j] = word[step]
+
 	if step == len(word)-1 {
 		return true
 	}

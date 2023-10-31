@@ -1,5 +1,7 @@
 package main
 
+// https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/description/
+
 func flatten(root *TreeNode) {
 	if root == nil {
 		return

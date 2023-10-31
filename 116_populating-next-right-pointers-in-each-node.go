@@ -1,5 +1,7 @@
 package main
 
+// https://leetcode.cn/problems/populating-next-right-pointers-in-each-node/description/
+
 type Node struct {
 	Val   int
 	Left  *Node

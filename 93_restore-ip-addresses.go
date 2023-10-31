@@ -6,6 +6,8 @@ import (
 	"strings"
 )
 
+// https://leetcode.cn/problems/restore-ip-addresses/description/
+
 func restoreIpAddresses(s string) []string {
 	result := make([]string, 0)
 

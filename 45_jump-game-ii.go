@@ -8,8 +8,9 @@ func jump(nums []int) int {
 	steps := 0
 
 	nextBorder := 0 // 下一个边界
-	curBorder := 0  // 当前的边界
+	curBorder := 0  // 当前能跳到的边界
 
+	// i表示从哪个位置起跳，所以 i 需要<len(nums)-1。因为到最后一位就不需要跳了
 	for i := 0; i < len(nums)-1; i++ {
 		nextBorder = max45(nextBorder, nums[i]+i) // 在当前border内去找下次的border
 		if i == curBorder {                       // 到达当前border

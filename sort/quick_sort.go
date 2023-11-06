@@ -14,7 +14,7 @@ func quickSort(nums []int, left, right int) {
 		return
 	}
 
-	key := nums[left]
+	key := nums[left] // left位置值为空缺
 
 	i, j := left, right
 
@@ -23,27 +23,18 @@ func quickSort(nums []int, left, right int) {
 		for i < j && nums[j] >= key {
 			j--
 		}
+		nums[i] = nums[j] // 填补i位置空缺，此时j位置空缺。
 
 		// 从左往右找到比 key 大的数
 		for i < j && nums[i] <= key {
 			i++
 		}
-
-		// 交换
-		if i < j {
-			swap(nums, i, j)
-		}
+		nums[j] = nums[i] // 填补j位置空缺，此时i位置空缺
 	}
-
-	// i = j
-	swap(nums, i, left)
-	//nums[left] = nums[i]
-	//nums[i] = key
+	// 此时nums[i]左边都 <= key, nums[i]右边都 >= key
+	// 填补i位置空缺
+	nums[i] = key
 
 	quickSort(nums, left, i-1)
 	quickSort(nums, j+1, right)
-}
-
-func swap(nums []int, i, j int) {
-	nums[i], nums[j] = nums[j], nums[i]
 }

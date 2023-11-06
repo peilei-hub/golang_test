@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 type TreeNode struct {
 	Val   int
@@ -54,6 +56,10 @@ func main() {
 	var res6 []int
 	behindOrder2(tree, &res6)
 	fmt.Println(res6)
+
+	var res7 []int
+	widthOrder(tree, &res7)
+	fmt.Println(res7)
 }
 
 func preOrder1(head *TreeNode, res *[]int) {
@@ -78,13 +84,13 @@ func preOrder2(head *TreeNode, res *[]int) {
 	for len(stack) != 0 {
 		node := stack[len(stack)-1]
 		stack = stack[:len(stack)-1]
-		*res = append(*res, node.Val)
+		*res = append(*res, node.Val) // print root
 
 		if node.Right != nil {
-			stack = append(stack, node.Right)
+			stack = append(stack, node.Right) // push right
 		}
 		if node.Left != nil {
-			stack = append(stack, node.Left)
+			stack = append(stack, node.Left) // push left
 		}
 	}
 }
@@ -161,5 +167,27 @@ func behindOrder2(head *TreeNode, res *[]int) {
 		cur := stack2[len(stack2)-1]
 		*res = append(*res, cur.Val)
 		stack2 = stack2[:len(stack2)-1]
+	}
+}
+
+func widthOrder(head *TreeNode, res *[]int) {
+	if head == nil {
+		return
+	}
+
+	queue := make([]*TreeNode, 0)
+	queue = append(queue, head)
+
+	for len(queue) != 0 {
+		cur := queue[0]
+		*res = append(*res, cur.Val)
+		queue = queue[1:]
+
+		if cur.Left != nil {
+			queue = append(queue, cur.Left)
+		}
+		if cur.Right != nil {
+			queue = append(queue, cur.Right)
+		}
 	}
 }

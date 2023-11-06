@@ -9,28 +9,6 @@ type TreeNode struct {
 	Right *TreeNode
 }
 
-// 把lowestCommonAncestor()当成是一个纯粹的二叉树后序遍历找节点函数(先忘记它是一个查找最近公共祖先的函数)，
-// 目的是找到p或者q节点，然后根据返回结果来判断最近公共祖先
-func lowestCommonAncestor1(root, p, q *TreeNode) *TreeNode {
-	// 从 root 找 p 或者 q
-
-	if root == nil || root == p || root == q {
-		return root
-	}
-
-	left := lowestCommonAncestor1(root.Left, p, q)
-	right := lowestCommonAncestor1(root.Right, p, q)
-
-	if left == nil {
-		return right
-	}
-	if right == nil {
-		return left
-	}
-
-	return root
-}
-
 func main() {
 	r := &TreeNode{
 		Val: 4,
@@ -68,30 +46,29 @@ func main() {
 	fmt.Println(ancestor)
 }
 
-var _236Res *TreeNode
-
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
-	findPorQ(root, p, q)
-	return _236Res
+	var res TreeNode
+	findPorQ(root, p, q, &res)
+	return &res
 }
 
-func findPorQ(node, p, q *TreeNode) bool {
+func findPorQ(node, p, q, res *TreeNode) bool {
 	if node == nil {
 		return false
 	}
 
-	leftHasPorQ := findPorQ(node.Left, p, q)
-	rightHasPorQ := findPorQ(node.Right, p, q)
+	leftHasPorQ := findPorQ(node.Left, p, q, res)
+	rightHasPorQ := findPorQ(node.Right, p, q, res)
 
 	// 自下往上找的，所以一旦找到就是最小的公共祖先
 	if leftHasPorQ && rightHasPorQ { //  如果这个节点的左右有 p 和 q，此节点就是公共祖先
-		_236Res = node
+		*res = *node
 	}
 	if leftHasPorQ && (node == p || node == q) { // 如果这个节点左子节点有 p or q，且此节点是 p 或者 q，此节点就是公共祖先
-		_236Res = node
+		*res = *node
 	}
 	if rightHasPorQ && (node == p || node == q) { // 如果这个节点右子节点有 p or q，且此节点是 p 或者 q，此节点就是公共祖先
-		_236Res = node
+		*res = *node
 	}
 
 	return leftHasPorQ || rightHasPorQ || (node == p || node == q)

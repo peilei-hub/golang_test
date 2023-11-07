@@ -4,6 +4,7 @@ import "fmt"
 
 // https://leetcode.cn/problems/longest-palindromic-substring/
 
+// 动态规划 dp[i][j]为 i-j 为回文
 func longestPalindrome1(s string) string {
 	dp := make([][]bool, len(s))
 	for i := 0; i < len(s); i++ {
@@ -15,10 +16,10 @@ func longestPalindrome1(s string) string {
 	for j := range s {
 		for i := 0; i <= j; i++ {
 			if i == j {
-				dp[i][j] = true
+				dp[i][j] = true // i=j 一定为回文
 			} else {
 				if s[i] == s[j] {
-					if j-i < 3 {
+					if j-i < 3 { //  长度小于 3 一定为回文
 						dp[i][j] = true
 					} else {
 						dp[i][j] = dp[i+1][j-1]
@@ -28,7 +29,7 @@ func longestPalindrome1(s string) string {
 				}
 			}
 
-			if dp[i][j] {
+			if dp[i][j] { // 更新 maxLength
 				if j-i+1 > maxLength {
 					maxLength = j - i + 1
 					start = i
@@ -47,8 +48,8 @@ func longestPalindrome2(s string) string {
 
 	var result string
 	for i := 0; i < len(s); i++ {
-		str1 := expandPalindrome(s, i, i)
-		str2 := expandPalindrome(s, i, i+1)
+		str1 := expandPalindrome(s, i, i)   //  以 i 为中心点
+		str2 := expandPalindrome(s, i, i+1) //  以 i,i+1 为中心点
 
 		if len(str1) > len(str2) {
 			if len(str1) > len(result) {

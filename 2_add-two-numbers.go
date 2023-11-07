@@ -10,10 +10,10 @@ type ListNode struct {
 
 // 使用头结点的下一节点
 func addTwoNumbers(l1 *ListNode, l2 *ListNode) *ListNode {
-	var carry = 0
+	var carry = 0 // 进位
 	result := &ListNode{}
 	temp := result
-	for l1 != nil || l2 != nil {
+	for l1 != nil || l2 != nil { // 有一个不为空就一直遍历，都为空才截止
 		var l1Val = 0
 		var l2Val = 0
 

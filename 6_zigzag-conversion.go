@@ -1,12 +1,14 @@
 package main
 
+// https://leetcode.cn/problems/zigzag-conversion/
+
 func convert(s string, numRows int) string {
 	if numRows == 1 {
 		return s
 	}
 
 	res := make([][]byte, numRows)
-	for i := 0; i < len(res); i++ {
+	for i := range res {
 		res[i] = make([]byte, 0)
 	}
 
@@ -14,7 +16,7 @@ func convert(s string, numRows int) string {
 	reverse := -1
 	for _, v := range s {
 		if row == numRows-1 || row == 0 {
-			reverse *= -1
+			reverse *= -1 // 翻转
 		}
 
 		res[row] = append(res[row], byte(v))

@@ -2,7 +2,7 @@ package main
 
 // https://leetcode.cn/problems/flatten-binary-tree-to-linked-list/description/
 
-func flatten(root *TreeNode) {
+func flatten(root *leetcode.TreeNode) {
 	if root == nil {
 		return
 	}

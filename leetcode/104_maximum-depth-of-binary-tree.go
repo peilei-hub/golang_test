@@ -1,6 +1,6 @@
 package main
 
-func maxDepth(root *TreeNode) int {
+func maxDepth(root *leetcode.TreeNode) int {
 	if root == nil {
 		return 0
 	}

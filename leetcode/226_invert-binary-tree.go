@@ -1,11 +1,11 @@
 package main
 
-func invertTree(root *TreeNode) *TreeNode {
+func invertTree(root *leetcode.TreeNode) *leetcode.TreeNode {
 	traverse226(root)
 	return root
 }
 
-func invertTree2(root *TreeNode) *TreeNode {
+func invertTree2(root *leetcode.TreeNode) *leetcode.TreeNode {
 	if root == nil {
 		return root
 	}
@@ -18,7 +18,7 @@ func invertTree2(root *TreeNode) *TreeNode {
 	return root
 }
 
-func traverse226(root *TreeNode) {
+func traverse226(root *leetcode.TreeNode) {
 	if root == nil {
 		return
 	}

@@ -1,19 +1,19 @@
 package main
 
-func minDepth(root *TreeNode) int {
+func minDepth(root *leetcode.TreeNode) int {
 	if root == nil {
 		return 0
 	}
 
 	depth := 0
 
-	queue := make([]*TreeNode, 0)
+	queue := make([]*leetcode.TreeNode, 0)
 	queue = append(queue, root)
 
 	for len(queue) != 0 {
 		depth++
 		curLen := len(queue)
-		nextLevelNodes := make([]*TreeNode, 0)
+		nextLevelNodes := make([]*leetcode.TreeNode, 0)
 		for _, node := range queue {
 			if node.Left == nil && node.Right == nil {
 				return depth

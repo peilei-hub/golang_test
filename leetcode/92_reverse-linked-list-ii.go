@@ -1,13 +1,15 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 // https://leetcode.cn/problems/reverse-linked-list-ii/
 
-func reverseBetween(head *ListNode, left int, right int) *ListNode {
+func reverseBetween(head *leetcode.ListNode, left int, right int) *leetcode.ListNode {
 	leftNode, rightNode := head, head
 
-	leftPre := &ListNode{}
+	leftPre := &leetcode.ListNode{}
 	leftPre.Next = head
 	res := leftPre
 	for i := 0; i < left-1; i++ { // pre为left的前驱节点
@@ -33,9 +35,9 @@ func reverseBetween(head *ListNode, left int, right int) *ListNode {
 	return res.Next
 }
 
-func reverse92(head, tail *ListNode) (h *ListNode) {
+func reverse92(head, tail *leetcode.ListNode) (h *leetcode.ListNode) {
 	cur := head
-	var preCur *ListNode
+	var preCur *leetcode.ListNode
 
 	for cur != tail { // 不包括尾部
 		next := cur.Next
@@ -50,9 +52,9 @@ func reverse92(head, tail *ListNode) (h *ListNode) {
 }
 
 func main() {
-	list1 := &ListNode{
+	list1 := &leetcode.ListNode{
 		Val: 5,
-		Next: &ListNode{
+		Next: &leetcode.ListNode{
 			Val:  3,
 			Next: nil,
 		},

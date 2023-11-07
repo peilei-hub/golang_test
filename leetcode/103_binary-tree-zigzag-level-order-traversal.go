@@ -1,19 +1,19 @@
 package main
 
-func zigzagLevelOrder(root *TreeNode) [][]int {
+func zigzagLevelOrder(root *leetcode.TreeNode) [][]int {
 	if root == nil {
 		return nil
 	}
 
 	result := make([][]int, 0)
-	queue := make([]*TreeNode, 0)
+	queue := make([]*leetcode.TreeNode, 0)
 	queue = append(queue, root)
 
 	reversed := false
 	for len(queue) != 0 {
 		curLevelLen := len(queue) // 当前level节点数量
 		curLevelVals := make([]int, curLevelLen)
-		nextLevelList := make([]*TreeNode, 0) // 保存下一层level节点
+		nextLevelList := make([]*leetcode.TreeNode, 0) // 保存下一层level节点
 		for i, node := range queue {
 			curLevelVals[i] = node.Val
 			if node.Left != nil {

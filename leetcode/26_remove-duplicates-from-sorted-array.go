@@ -19,7 +19,7 @@ func removeDuplicates1(nums []int) int {
 	idx := 1
 
 	for i := 1; i < len(nums); i++ {
-		if nums[idx-1] != nums[i] {
+		if nums[i] != nums[idx-1] { // 当前num跟idx的前一位不相同，可以将num放在idx位置
 			nums[idx] = nums[i]
 			idx++
 		}

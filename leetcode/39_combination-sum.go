@@ -12,12 +12,10 @@ func combinationSum(candidates []int, target int) [][]int {
 	return result
 }
 
-func traceback39(candidates []int, target int, result *[][]int, tmp []int, sum int, begin int) {
+func traceback39(candidates []int, target int, result *[][]int, tmp []int, sum int, start int) {
 	if sum == target { // 如果找到
 		array := make([]int, len(tmp))
-		for i := range tmp {
-			array[i] = tmp[i]
-		}
+		copy(array, tmp)
 		*result = append(*result, array)
 		return
 	}
@@ -26,7 +24,7 @@ func traceback39(candidates []int, target int, result *[][]int, tmp []int, sum i
 	}
 
 	// sum < target
-	for i := begin; i < len(candidates); i++ {
+	for i := start; i < len(candidates); i++ {
 		tmp = append(tmp, candidates[i])
 		traceback39(candidates, target, result, tmp, sum+candidates[i], i)
 

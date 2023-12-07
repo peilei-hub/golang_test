@@ -13,7 +13,7 @@ func longestPalindrome1(s string) string {
 
 	var maxLength, start int
 
-	for j := range s {
+	for j := 0; j < len(s); j++ {
 		for i := 0; i <= j; i++ {
 			if i == j {
 				dp[i][j] = true // i=j 一定为回文

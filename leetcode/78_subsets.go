@@ -13,9 +13,7 @@ func subsets(nums []int) [][]int {
 
 func traceback78(result *[][]int, nums []int, tmp []int, start int) {
 	cur := make([]int, len(tmp))
-	for i, v := range tmp {
-		cur[i] = v
-	}
+	copy(cur, tmp)
 	*result = append(*result, cur)
 
 	for i := start; i < len(nums); i++ {

@@ -2,7 +2,7 @@ package main
 
 // https://leetcode.cn/problems/search-a-2d-matrix/
 
-// m + n
+// O(m + n)
 
 func searchMatrix(matrix [][]int, target int) bool {
 	rowMax := len(matrix) - 1

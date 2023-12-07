@@ -17,7 +17,7 @@ func Load() error {
 	ctx := context.Background()
 
 	infoCtx := &loaders.InfoCtx{
-		Id: 2,
+		Id: 3, // fixme 1 2 3
 	}
 
 	defer func() {

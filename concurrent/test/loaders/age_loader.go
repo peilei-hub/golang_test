@@ -35,9 +35,9 @@ type AgeLoader struct {
 }
 
 func (l *AgeLoader) Load() error {
-	time.Sleep(2 * time.Second) // fixme
 	if l.Id == 1 {
-		l.Resp = 0
+		time.Sleep(2 * time.Second) // fixme
+	} else if l.Id == 2 {
 		return errors.New("age err")
 	}
 	l.Resp = 11

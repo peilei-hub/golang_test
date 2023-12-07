@@ -65,8 +65,8 @@ func (c *ConcurrentLoader) run(ctx context.Context, concurrentSize int, resultsC
 
 func (c *ConcurrentLoader) ConcurrentLoad(timeout time.Duration) {
 	loaderCount := len(c.loaders)
-	resultsChan := make(chan *loaderResult, loaderCount)
-	messagesChan := make(chan *loaderInfo, loaderCount)
+	resultsChan := make(chan *loaderResult, loaderCount) // 存放结果的chan
+	//messagesChan := make(chan *loaderInfo, loaderCount)  // 存放loader信息的chan
 
 	loaderMap := map[int]*loaderInfo{}
 
@@ -76,10 +76,17 @@ func (c *ConcurrentLoader) ConcurrentLoad(timeout time.Duration) {
 			Loader: loader,
 		}
 		loaderMap[i] = info
-		messagesChan <- info
+		//messagesChan <- info
+
+		go func(info *loaderInfo) {
+			resultsChan <- &loaderResult{
+				Id:  info.Id,
+				Err: info.Loader.Load(),
+			}
+		}(info)
 	}
 
-	cancelFunc := c.run(context.Background(), loaderCount, resultsChan, messagesChan, timeout)
+	//cancelFunc := c.run(context.Background(), loaderCount, resultsChan, messagesChan, timeout)
 
 	timer := time.After(timeout)
 	resultsMap := map[int]*loaderResult{}
@@ -102,5 +109,5 @@ LoaderLoop:
 		}
 	}
 
-	cancelFunc()
+	//cancelFunc()
 }

@@ -32,37 +32,6 @@ func (c *ConcurrentLoader) AppendLoader(loaders ...ILoader) {
 	c.loaders = append(c.loaders, loaders...)
 }
 
-func (c *ConcurrentLoader) run(ctx context.Context, concurrentSize int, resultsChain chan<- *loaderResult, messagesChan <-chan *loaderInfo, timeout time.Duration) context.CancelFunc {
-	cancelCtx, cancelFunc := context.WithTimeout(ctx, timeout)
-	//concurrentCh := make(chan struct{}, concurrentSize)
-
-	go func(ctx context.Context) {
-	Exit:
-		for {
-			select {
-			case <-ctx.Done():
-				break Exit
-
-			// create a goroutine to run loaders task
-			case m := <-messagesChan:
-				//concurrentCh <- struct{}{}
-
-				go func(l ILoader, loaderId int) {
-					//defer func() {
-					//	<-concurrentCh
-					//}()
-					resultsChain <- &loaderResult{
-						Id:  loaderId,
-						Err: l.Load(),
-					}
-				}(m.Loader, m.Id)
-			}
-		}
-	}(cancelCtx)
-
-	return cancelFunc
-}
-
 func (c *ConcurrentLoader) ConcurrentLoad(timeout time.Duration) {
 	loaderCount := len(c.loaders)
 	resultsChan := make(chan *loaderResult, loaderCount) // 存放结果的chan
@@ -110,4 +79,35 @@ LoaderLoop:
 	}
 
 	//cancelFunc()
+}
+
+func (c *ConcurrentLoader) run(ctx context.Context, concurrentSize int, resultsChain chan<- *loaderResult, messagesChan <-chan *loaderInfo, timeout time.Duration) context.CancelFunc {
+	cancelCtx, cancelFunc := context.WithTimeout(ctx, timeout)
+	//concurrentCh := make(chan struct{}, concurrentSize)
+
+	go func(ctx context.Context) {
+	Exit:
+		for {
+			select {
+			case <-ctx.Done():
+				break Exit
+
+			// create a goroutine to run loaders task
+			case m := <-messagesChan:
+				//concurrentCh <- struct{}{}
+
+				go func(l ILoader, loaderId int) {
+					//defer func() {
+					//	<-concurrentCh
+					//}()
+					resultsChain <- &loaderResult{
+						Id:  loaderId,
+						Err: l.Load(),
+					}
+				}(m.Loader, m.Id)
+			}
+		}
+	}(cancelCtx)
+
+	return cancelFunc
 }

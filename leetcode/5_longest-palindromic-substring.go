@@ -5,6 +5,7 @@ import "fmt"
 // https://leetcode.cn/problems/longest-palindromic-substring/
 
 // 动态规划 dp[i][j]为 i-j 为回文
+// [i,j]里面有 i,i+1,j-1,j。i,j又依赖i+1,j-1。编历时先限定j，然后i从j到0
 func longestPalindrome1(s string) string {
 	dp := make([][]bool, len(s))
 	for i := 0; i < len(s); i++ {
@@ -14,16 +15,22 @@ func longestPalindrome1(s string) string {
 	var maxLength, start int
 
 	for j := 0; j < len(s); j++ {
-		for i := 0; i <= j; i++ {
+		for i := j; i >= 0; i-- {
 			if i == j {
 				dp[i][j] = true // i=j 一定为回文
 			} else {
 				if s[i] == s[j] {
-					if j-i < 3 { //  长度小于 3 一定为回文
+					if i+1 >= j-1 { //
 						dp[i][j] = true
 					} else {
 						dp[i][j] = dp[i+1][j-1]
 					}
+					// 跟上面判断一样
+					//if j-i < 3 { //  长度小于 3 一定为回文
+					//	dp[i][j] = true
+					//} else {
+					//	dp[i][j] = dp[i+1][j-1]
+					//}
 				} else {
 					dp[i][j] = false
 				}
@@ -83,6 +90,6 @@ func expandPalindrome(s string, i, j int) string {
 }
 
 func main() {
-	palindrome2 := longestPalindrome2("babad")
+	palindrome2 := longestPalindrome1("babad")
 	fmt.Println(palindrome2)
 }

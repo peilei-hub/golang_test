@@ -15,9 +15,7 @@ func combine(n int, k int) [][]int {
 func traceback77(result *[][]int, n, k, idx, start int, tmp []int) {
 	if idx == k {
 		t := make([]int, k)
-		for i, v := range tmp {
-			t[i] = v
-		}
+		copy(t, tmp)
 		*result = append(*result, t)
 		return
 	}

@@ -20,6 +20,8 @@ func backtrace91(s string, start int, result *int) {
 		return
 	}
 
+	// 所有可能，一位 两位
+
 	backtrace91(s, start+1, result) // 一位
 
 	if start < len(s)-1 {

@@ -23,7 +23,7 @@ func mergeSortInner(nums []int, left, right int, temp []int) { // 将 [left,righ
 }
 
 func merge(nums []int, left, mid, right int, temp []int) {
-	// 【left,mid]
+	// [left,mid]
 	// [mid+1,right]
 	idx := 0
 

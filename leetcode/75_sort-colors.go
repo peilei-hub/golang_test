@@ -7,7 +7,8 @@ import "fmt"
 func sortColors(nums []int) {
 	left, right := 0, len(nums)-1
 
-	for i := 0; i <= right; {
+	i := 0
+	for i <= right {
 		if nums[i] == 2 { // 如果值为2
 			nums[i], nums[right] = nums[right], nums[i] // 跟最右边的替换，此时右边的为2
 			right--

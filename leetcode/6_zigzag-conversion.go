@@ -12,8 +12,8 @@ func convert(s string, numRows int) string {
 		res[i] = make([]byte, 0)
 	}
 
-	row := 0
-	reverse := -1
+	row := 0      // 行号
+	reverse := -1 // 判断是否翻转遍历 0->n , n->0
 	for _, v := range s {
 		if row == numRows-1 || row == 0 {
 			reverse *= -1 // 翻转

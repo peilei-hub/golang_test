@@ -11,8 +11,8 @@ import (
 
 func minWindow(s string, t string) string {
 	target := make(map[byte]int) // 目标包含的每个字符出现的次数
-	for _, i := range t {
-		target[byte(i)]++
+	for _, v := range t {
+		target[byte(v)]++
 	}
 
 	window := make(map[byte]int)
@@ -30,6 +30,7 @@ func minWindow(s string, t string) string {
 			continue
 		}
 
+		// b 在目标里
 		window[b]++
 		if target[b] == window[b] { // 相等则有效数加1
 			validNum++

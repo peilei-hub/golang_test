@@ -16,10 +16,7 @@ func combinationSum2(candidates []int, target int) [][]int {
 func traceback40(candidates []int, result *[][]int, tmp []int, target int, sum int, begin int) {
 	if sum == target {
 		t := make([]int, len(tmp))
-		for i, v := range tmp {
-			t[i] = v
-		}
-
+		copy(t, tmp)
 		*result = append(*result, t)
 		return
 	}

@@ -12,11 +12,11 @@ func subsetsWithDup(nums []int) [][]int {
 
 	sort.Ints(nums)
 
-	backtrace90(nums, []int{}, &result, 0)
+	backtrack90(nums, []int{}, &result, 0)
 	return result
 }
 
-func backtrace90(nums []int, temp []int, result *[][]int, start int) {
+func backtrack90(nums []int, temp []int, result *[][]int, start int) {
 	t := make([]int, len(temp))
 	copy(t, temp)
 	*result = append(*result, t)
@@ -28,7 +28,7 @@ func backtrace90(nums []int, temp []int, result *[][]int, start int) {
 
 		temp = append(temp, nums[i])
 
-		backtrace90(nums, temp, result, i+1)
+		backtrack90(nums, temp, result, i+1)
 
 		temp = temp[:len(temp)-1]
 	}

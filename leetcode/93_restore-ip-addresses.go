@@ -11,12 +11,12 @@ import (
 func restoreIpAddresses(s string) []string {
 	result := make([]string, 0)
 
-	backtrace93(s, &result, make([]string, 4), 0, 0)
+	backtrack93(s, &result, make([]string, 4), 0, 0)
 
 	return result
 }
 
-func backtrace93(s string, result *[]string, tmp []string, tmpIdx, start int) {
+func backtrack93(s string, result *[]string, tmp []string, tmpIdx, start int) {
 	if start >= len(s) && tmpIdx == 4 { // 满足条件， start到末尾(遍历完成)，且tmp长度为 4
 		join := strings.Join(tmp, ".")
 		*result = append(*result, join)
@@ -34,7 +34,7 @@ func backtrace93(s string, result *[]string, tmp []string, tmpIdx, start int) {
 		if isValid93(sub) {
 			tmp[tmpIdx] = sub
 
-			backtrace93(s, result, tmp, tmpIdx+1, i)
+			backtrack93(s, result, tmp, tmpIdx+1, i)
 		}
 	}
 }

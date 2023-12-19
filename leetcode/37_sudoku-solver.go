@@ -22,7 +22,7 @@ func solveSudoku(board [][]byte) {
 	for i := 0; i < 9; i++ {
 		result = append(result, make([]byte, 9))
 	}
-	backtrace37(board, rowExist, columnExist, blockExist, 0, 0, selections, result)
+	backtrack37(board, rowExist, columnExist, blockExist, 0, 0, selections, result)
 	for i, bytes := range result {
 		for j, b := range bytes {
 			board[i][j] = b
@@ -30,7 +30,7 @@ func solveSudoku(board [][]byte) {
 	}
 }
 
-func backtrace37(board [][]byte, rowExist, columnExist, blockExist [9][10]bool, rowIdx, columnIdx int, selections []int, result [][]byte) {
+func backtrack37(board [][]byte, rowExist, columnExist, blockExist [9][10]bool, rowIdx, columnIdx int, selections []int, result [][]byte) {
 	if columnIdx == 9 {
 		rowIdx++
 		columnIdx = 0
@@ -53,7 +53,7 @@ func backtrace37(board [][]byte, rowExist, columnExist, blockExist [9][10]bool, 
 				columnExist[columnIdx][num] = true
 				blockExist[rowIdx/3*3+columnIdx/3][num] = true
 
-				backtrace37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
+				backtrack37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
 
 				board[rowIdx][columnIdx] = '.'
 				rowExist[rowIdx][num] = false
@@ -62,7 +62,7 @@ func backtrace37(board [][]byte, rowExist, columnExist, blockExist [9][10]bool, 
 			}
 		}
 	} else {
-		backtrace37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
+		backtrack37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
 	}
 }
 

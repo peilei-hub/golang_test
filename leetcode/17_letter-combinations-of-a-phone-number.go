@@ -21,12 +21,12 @@ func letterCombinations(digits string) []string {
 
 	result := make([]string, 0)
 	bytes := make([]byte, len(digits))
-	backtrace17(digits, digitsMap, &result, 0, bytes)
+	backtrack17(digits, digitsMap, &result, 0, bytes)
 
 	return result
 }
 
-func backtrace17(digits string, digitsMap map[byte]string, result *[]string, idx int, res []byte) {
+func backtrack17(digits string, digitsMap map[byte]string, result *[]string, idx int, res []byte) {
 	if idx == len(digits) { // 如果idx跟digits长度相同，说明已经遍历到最后一位了，将字符串加到结果里
 		*result = append(*result, string(res))
 		return
@@ -38,7 +38,7 @@ func backtrace17(digits string, digitsMap map[byte]string, result *[]string, idx
 	// 对可用的选择进行遍历
 	for _, b := range str {
 		res[idx] = byte(b)                                 // 选择一个
-		backtrace17(digits, digitsMap, result, idx+1, res) // 在当前的选择基础上进行下一次递归
+		backtrack17(digits, digitsMap, result, idx+1, res) // 在当前的选择基础上进行下一次递归
 		// 回退刚刚的选择
 	}
 }

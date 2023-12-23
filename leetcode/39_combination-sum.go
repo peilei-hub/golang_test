@@ -14,9 +14,7 @@ func combinationSum(candidates []int, target int) [][]int {
 
 func traceback39(candidates []int, target int, result *[][]int, tmp []int, sum int, start int) {
 	if sum == target { // 如果找到
-		array := make([]int, len(tmp))
-		copy(array, tmp)
-		*result = append(*result, array)
+		*result = append(*result, append([]int{}, tmp...))
 		return
 	}
 	if sum > target { // 如果大于，则后面不可能找到，直接返回

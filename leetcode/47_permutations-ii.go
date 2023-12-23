@@ -20,16 +20,12 @@ func permuteUnique(nums []int) [][]int {
 
 func traceback47(result *[][]int, tmp []int, used []bool, nums []int, idx int) {
 	if idx == len(tmp) {
-		t := make([]int, len(tmp))
-		for i, v := range tmp {
-			t[i] = v
-		}
-		*result = append(*result, t)
+		*result = append(*result, append([]int{}, tmp...))
 		return
 	}
 
 	for i, num := range nums {
-		if used[i] || (i > 0 && nums[i] == nums[i-1] && !used[i-1]) { // 如果前一个数没被选过，那也不能选当前的数
+		if used[i] || (!used[i-1] && i > 0 && nums[i] == nums[i-1]) { // 如果前一个数没被选过，那也不能选当前的数
 			continue
 		}
 

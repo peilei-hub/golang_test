@@ -25,18 +25,18 @@ func getPermutation(n int, k int) string {
 	return result
 }
 
-func traceback60(result *string, tmp []int, nums []int, used []bool, step int, k int, total *int) {
+func traceback60(result *string, tmp []int, nums []int, used []bool, idx int, k int, total *int) {
 	if *total >= k {
 		return
 	}
-	if step == len(nums) {
+	if idx == len(nums) {
 		*total++
-		str := ""
-		for _, i := range tmp {
-			str += strconv.Itoa(i)
-		}
 
 		if *total == k {
+			str := ""
+			for _, i := range tmp {
+				str += strconv.Itoa(i)
+			}
 			*result = str
 		}
 		return
@@ -45,9 +45,9 @@ func traceback60(result *string, tmp []int, nums []int, used []bool, step int, k
 	for i := 0; i < len(nums); i++ {
 		if !used[i] {
 			used[i] = true
-			tmp[step] = nums[i]
+			tmp[idx] = nums[i]
 
-			traceback60(result, tmp, nums, used, step+1, k, total)
+			traceback60(result, tmp, nums, used, idx+1, k, total)
 
 			used[i] = false
 		}

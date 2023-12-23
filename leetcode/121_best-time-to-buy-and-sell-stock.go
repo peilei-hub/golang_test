@@ -3,7 +3,7 @@ package main
 func maxProfit(prices []int) int {
 	days := len(prices)
 	dp := make([][]int, days) // 第i天是否持有
-	for i, _ := range dp {
+	for i := range dp {
 		dp[i] = make([]int, 2)
 	}
 

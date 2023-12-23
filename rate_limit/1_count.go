@@ -23,7 +23,7 @@ func NewCounterLimiter(limit int, window time.Duration) *CounterLimiter {
 func (l *CounterLimiter) Allow() bool {
 	now := time.Now()
 	if now.Sub(l.lastTime) <= l.window { // 在window内
-		if l.counter > l.limit {
+		if l.counter >= l.limit {
 			return false
 		}
 		l.counter++

@@ -61,7 +61,7 @@ func backtrack37(board [][]byte, rowExist, columnExist, blockExist [9][10]bool, 
 				blockExist[rowIdx/3*3+columnIdx/3][num] = false
 			}
 		}
-	} else {
+	} else { // 是数字，跳过
 		backtrack37(board, rowExist, columnExist, blockExist, rowIdx, columnIdx+1, selections, result)
 	}
 }

@@ -17,11 +17,7 @@ func permute(nums []int) [][]int {
 
 func traceback46(result *[][]int, tmp []int, nums []int, used []bool, idx int) {
 	if idx == len(nums) {
-		t := make([]int, len(tmp))
-		for i, v := range tmp {
-			t[i] = v
-		}
-		*result = append(*result, t)
+		*result = append(*result, append([]int{}, tmp...))
 		return
 	}
 

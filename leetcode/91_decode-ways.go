@@ -34,7 +34,29 @@ func backtrack91(s string, start int, result *int) {
 	}
 }
 
+func numDecodings2(s string) int {
+	n := len(s)
+
+	dp := make([]int, n+1)
+	dp[0] = 1
+	for i := 1; i <= n; i++ {
+		temp := 0
+		if s[i-1] != '0' {
+			temp += dp[i-1]
+		}
+
+		if i > 1 && s[i-2] != '0' && ((s[i-2]-'0')*10+(s[i-1]-'0')) <= 26 {
+			temp += dp[i-2]
+		}
+
+		dp[i] = temp
+	}
+
+	return dp[n]
+}
+
 func main() {
-	decodings := numDecodings("111111111111111111111111111111111111111111111")
+	//decodings := numDecodings2("111111111111111111111111111111111111111111111")
+	decodings := numDecodings2("12")
 	fmt.Println(decodings)
 }

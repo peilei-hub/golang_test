@@ -4,7 +4,7 @@ package main
 
 // https://leetcode.cn/problems/next-permutation/solution/xia-yi-ge-pai-lie-suan-fa-xiang-jie-si-lu-tui-dao-/
 
-// 从后往前找到升降的转折点的升点，比如3 5 4，然后从后往前找到第一个比升点大的点 4，然后3和4替换变成4 5 3，然后从转折点开始往后的点reverse 4 3 5
+// 从后往前找到升降的转折点的升点，比如3 5 4，然后从后往前找到第一个比升点3大的点 4，然后3和4替换变成4 5 3，然后从转折点开始往后的点reverse 4 3 5
 // 注意一些特殊判断
 
 func nextPermutation(nums []int) {

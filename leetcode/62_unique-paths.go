@@ -8,9 +8,9 @@ import (
 // https://leetcode.cn/problems/unique-paths/
 
 func uniquePathsV1(m int, n int) int {
-	dp := make([][]int, 0)
-	for i := 0; i < m; i++ {
-		dp = append(dp, make([]int, n))
+	dp := make([][]int, m)
+	for i := range dp {
+		dp[i] = make([]int, n)
 	}
 
 	for i := 0; i < m; i++ {

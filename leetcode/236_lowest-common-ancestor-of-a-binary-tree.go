@@ -46,6 +46,25 @@ func main() {
 	fmt.Println(ancestor)
 }
 
+func lowestCommonAncestor1(root, p, q *TreeNode) *TreeNode {
+	if root == nil || root == p || root == q {
+		return root
+	}
+
+	left := lowestCommonAncestor1(root.Left, p, q)
+	right := lowestCommonAncestor1(root.Right, p, q)
+	if left == nil && right == nil {
+		return nil
+	}
+	if left == nil {
+		return right
+	}
+	if right == nil {
+		return left
+	}
+	return root
+}
+
 func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
 	var res TreeNode
 	findPorQ(root, p, q, &res)

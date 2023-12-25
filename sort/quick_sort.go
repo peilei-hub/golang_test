@@ -36,5 +36,5 @@ func quickSort(nums []int, left, right int) {
 	nums[i] = key
 
 	quickSort(nums, left, i-1)
-	quickSort(nums, j+1, right)
+	quickSort(nums, i+1, right)
 }

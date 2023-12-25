@@ -60,6 +60,9 @@ func main() {
 	var res7 []int
 	widthOrder(tree, &res7)
 	fmt.Println(res7)
+
+	path := getPath(tree, tree.Right.Left)
+	fmt.Println(path)
 }
 
 func preOrder1(head *TreeNode, res *[]int) {
@@ -190,4 +193,43 @@ func widthOrder(head *TreeNode, res *[]int) {
 			queue = append(queue, cur.Right)
 		}
 	}
+}
+
+func getPath(root, target *TreeNode) int {
+	if root == nil {
+		return 0
+	}
+	if root == target {
+		return 1
+	}
+
+	left := getPath(root.Left, target)
+	right := getPath(root.Right, target)
+	if left == 0 && right == 0 {
+		return 0
+	}
+
+	if left == 0 {
+		return right + 1
+	}
+	return left + 1
+}
+
+func lowestCommonAncestor(root, p, q *TreeNode) *TreeNode {
+	if root == nil || root == p || root == q {
+		return root
+	}
+
+	left := lowestCommonAncestor(root.Left, p, q)
+	right := lowestCommonAncestor(root.Right, p, q)
+	if left == nil && right == nil {
+		return nil
+	}
+	if left == nil {
+		return right
+	}
+	if right == nil {
+		return left
+	}
+	return root
 }

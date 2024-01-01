@@ -18,14 +18,14 @@ func getPermutation(n int, k int) string {
 	tmp := make([]int, n)
 
 	total := 0
-	traceback60(&result, tmp, nums, used, 0, k, &total)
+	backtrack60(&result, tmp, nums, used, 0, k, &total)
 
 	fmt.Println(result)
 
 	return result
 }
 
-func traceback60(result *string, tmp []int, nums []int, used []bool, idx int, k int, total *int) {
+func backtrack60(result *string, tmp []int, nums []int, used []bool, idx int, k int, total *int) {
 	if *total >= k {
 		return
 	}
@@ -47,7 +47,7 @@ func traceback60(result *string, tmp []int, nums []int, used []bool, idx int, k 
 			used[i] = true
 			tmp[idx] = nums[i]
 
-			traceback60(result, tmp, nums, used, idx+1, k, total)
+			backtrack60(result, tmp, nums, used, idx+1, k, total)
 
 			used[i] = false
 		}

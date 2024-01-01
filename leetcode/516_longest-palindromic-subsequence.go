@@ -13,7 +13,7 @@ func longestPalindromeSubseq(s string) int {
 
 	for j := 0; j < len(s); j++ {
 		for i := j; i >= 0; i-- {
-			if i == j {
+			if i == j { // i 和 j 相同
 				dp[i][j] = 1
 			} else {
 				if s[i] == s[j] {

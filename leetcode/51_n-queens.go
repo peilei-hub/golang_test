@@ -17,12 +17,12 @@ func solveNQueens(n int) [][]string {
 	result := make([][]string, 0)
 
 	// 每次填新的一行
-	traceback51(&result, n, 0, tables)
+	backtrack51(&result, n, 0, tables)
 
 	return result
 }
 
-func traceback51(result *[][]string, n int, rowIdx int, tables [][]byte) {
+func backtrack51(result *[][]string, n int, rowIdx int, tables [][]byte) {
 	if rowIdx == n {
 		tmp := make([]string, 0)
 		for _, table := range tables {
@@ -37,7 +37,7 @@ func traceback51(result *[][]string, n int, rowIdx int, tables [][]byte) {
 		if isValid51(tables, rowIdx, columnIdx) {
 			tables[rowIdx][columnIdx] = 'Q'
 
-			traceback51(result, n, rowIdx+1, tables)
+			backtrack51(result, n, rowIdx+1, tables)
 
 			tables[rowIdx][columnIdx] = '.'
 		}

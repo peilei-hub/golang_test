@@ -17,9 +17,7 @@ func subsetsWithDup(nums []int) [][]int {
 }
 
 func backtrack90(nums []int, temp []int, result *[][]int, start int) {
-	t := make([]int, len(temp))
-	copy(t, temp)
-	*result = append(*result, t)
+	*result = append(*result, append([]int{}, temp...))
 
 	for i := start; i < len(nums); i++ {
 		if i > start && nums[i] == nums[i-1] {

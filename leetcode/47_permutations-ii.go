@@ -14,11 +14,11 @@ func permuteUnique(nums []int) [][]int {
 	tmp := make([]int, len(nums))
 	used := make([]bool, len(nums))
 
-	traceback47(&result, tmp, used, nums, 0)
+	backtrack47(&result, tmp, used, nums, 0)
 	return result
 }
 
-func traceback47(result *[][]int, tmp []int, used []bool, nums []int, idx int) {
+func backtrack47(result *[][]int, tmp []int, used []bool, nums []int, idx int) {
 	if idx == len(tmp) {
 		*result = append(*result, append([]int{}, tmp...))
 		return
@@ -32,7 +32,7 @@ func traceback47(result *[][]int, tmp []int, used []bool, nums []int, idx int) {
 		tmp[idx] = num
 		used[i] = true
 
-		traceback47(result, tmp, used, nums, idx+1)
+		backtrack47(result, tmp, used, nums, idx+1)
 
 		used[i] = false
 	}

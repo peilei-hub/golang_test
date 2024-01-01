@@ -24,13 +24,12 @@ func myBuildTree(preorder []int, inorder []int, indexMap map[int]int, preorderLe
 	// 在中序遍历里找到根节点
 	inorderRoot := indexMap[preorder[preOrderRoot]]
 
-	root := &TreeNode{
-		Val: preorder[preOrderRoot],
-	}
-
 	// 左子树节点数目
 	leftSubTreeNums := inorderRoot - inorderLeft
 
+	root := &TreeNode{
+		Val: preorder[preOrderRoot],
+	}
 	root.Left = myBuildTree(preorder, inorder, indexMap, preorderLeft+1, preorderLeft+leftSubTreeNums, inorderLeft, inorderRoot-1)
 	root.Right = myBuildTree(preorder, inorder, indexMap, preorderLeft+leftSubTreeNums+1, preorderRight, inorderRoot+1, inorderRight)
 	return root

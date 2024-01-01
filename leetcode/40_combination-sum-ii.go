@@ -9,11 +9,11 @@ func combinationSum2(candidates []int, target int) [][]int {
 
 	result := make([][]int, 0)
 
-	traceback40(candidates, &result, nil, target, 0, 0)
+	backtrack40(candidates, &result, nil, target, 0, 0)
 	return result
 }
 
-func traceback40(candidates []int, result *[][]int, tmp []int, target int, sum int, begin int) {
+func backtrack40(candidates []int, result *[][]int, tmp []int, target int, sum int, begin int) {
 	if sum == target {
 		*result = append(*result, append([]int{}, tmp...))
 		return
@@ -29,7 +29,7 @@ func traceback40(candidates []int, result *[][]int, tmp []int, target int, sum i
 		}
 
 		tmp = append(tmp, candidates[i])
-		traceback40(candidates, result, tmp, target, sum+candidates[i], i+1)
+		backtrack40(candidates, result, tmp, target, sum+candidates[i], i+1)
 		tmp = tmp[:len(tmp)-1]
 	}
 }

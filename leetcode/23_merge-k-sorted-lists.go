@@ -6,11 +6,11 @@ func mergeKLists(lists []*ListNode) *ListNode {
 }
 
 func mergeHelper(lists []*ListNode, left, right int) *ListNode {
-	if left == right {
-		return lists[left]
-	}
 	if left > right {
 		return nil
+	}
+	if left == right {
+		return lists[left]
 	}
 
 	mid := (left + right) / 2

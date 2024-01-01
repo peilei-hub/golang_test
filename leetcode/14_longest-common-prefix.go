@@ -20,11 +20,11 @@ func longestCommonPrefix(strs []string) string {
 	}
 
 	result := ""
-	for i := 0; i < minLen; i++ {
-		var tmp = bytesList[0][i]
+	for col := 0; col < minLen; col++ {
+		var tmp = bytesList[0][col]
 		match := true
-		for j := 1; j < len(strs); j++ {
-			if bytesList[j][i] != tmp {
+		for row := 1; row < len(strs); row++ {
+			if bytesList[row][col] != tmp {
 				match = false
 				break
 			}

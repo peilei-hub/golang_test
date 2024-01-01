@@ -3,14 +3,14 @@ package main
 import "fmt"
 
 func moveZeroes(nums []int) {
-	l, r, n := 0, 0, len(nums)
+	idx, i := 0, 0
 
-	for r < n { // l是可以放置非0数据的下标
-		if nums[r] != 0 { // 找到非0，就放到l，然后l++
-			nums[l], nums[r] = nums[r], nums[l]
-			l++
+	for i <= len(nums)-1 { // idx是可以放置非0数据的下标
+		if nums[i] != 0 { // 找到非0，就放到idx，然后idx++
+			nums[idx], nums[i] = nums[i], nums[idx]
+			idx++
 		}
-		r++
+		i++
 	}
 }
 

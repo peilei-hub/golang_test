@@ -35,17 +35,15 @@ func (c *ConcurrentLoader) AppendLoader(loaders ...ILoader) {
 func (c *ConcurrentLoader) ConcurrentLoad(timeout time.Duration) {
 	loaderCount := len(c.loaders)
 	resultsChan := make(chan *loaderResult, loaderCount) // 存放结果的chan
-	//messagesChan := make(chan *loaderInfo, loaderCount)  // 存放loader信息的chan
 
-	loaderMap := map[int]*loaderInfo{}
+	loaderInfoMap := map[int]*loaderInfo{}
 
 	for i, loader := range c.loaders {
 		info := &loaderInfo{
 			Id:     i,
 			Loader: loader,
 		}
-		loaderMap[i] = info
-		//messagesChan <- info
+		loaderInfoMap[i] = info
 
 		go func(info *loaderInfo) {
 			resultsChan <- &loaderResult{
@@ -54,8 +52,6 @@ func (c *ConcurrentLoader) ConcurrentLoad(timeout time.Duration) {
 			}
 		}(info)
 	}
-
-	//cancelFunc := c.run(context.Background(), loaderCount, resultsChan, messagesChan, timeout)
 
 	timer := time.After(timeout)
 	resultsMap := map[int]*loaderResult{}
@@ -66,10 +62,10 @@ LoaderLoop:
 		case result := <-resultsChan:
 			resultsMap[result.Id] = result
 			if result.Err != nil {
-				loaderMap[result.Id].Loader.SetError(result.Err)
+				loaderInfoMap[result.Id].Loader.SetError(result.Err)
 			}
 		case <-timer:
-			for loaderId, info := range loaderMap {
+			for loaderId, info := range loaderInfoMap {
 				if _, ok := resultsMap[loaderId]; !ok {
 					info.Loader.SetError(ConcurrentLoadTimeOutError)
 				}
@@ -77,37 +73,4 @@ LoaderLoop:
 			break LoaderLoop
 		}
 	}
-
-	//cancelFunc()
-}
-
-func (c *ConcurrentLoader) run(ctx context.Context, concurrentSize int, resultsChain chan<- *loaderResult, messagesChan <-chan *loaderInfo, timeout time.Duration) context.CancelFunc {
-	cancelCtx, cancelFunc := context.WithTimeout(ctx, timeout)
-	//concurrentCh := make(chan struct{}, concurrentSize)
-
-	go func(ctx context.Context) {
-	Exit:
-		for {
-			select {
-			case <-ctx.Done():
-				break Exit
-
-			// create a goroutine to run loaders task
-			case m := <-messagesChan:
-				//concurrentCh <- struct{}{}
-
-				go func(l ILoader, loaderId int) {
-					//defer func() {
-					//	<-concurrentCh
-					//}()
-					resultsChain <- &loaderResult{
-						Id:  loaderId,
-						Err: l.Load(),
-					}
-				}(m.Loader, m.Id)
-			}
-		}
-	}(cancelCtx)
-
-	return cancelFunc
 }

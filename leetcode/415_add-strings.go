@@ -85,6 +85,7 @@ func subStrings(nums1, nums2 string) string {
 		result = strconv.Itoa(temp) + result
 	}
 
+	// 去除前面的'0'
 	idx := 0
 	for i, v := range result {
 		if v != '0' {

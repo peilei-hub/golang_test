@@ -12,7 +12,7 @@ func strStr1(haystack string, needle string) int {
 	}
 
 	for i := 0; i <= len1-len2; i++ {
-		start := i
+		start := i // start
 
 		match := true
 		for _, b := range needle {

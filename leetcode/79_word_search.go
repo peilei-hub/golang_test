@@ -19,11 +19,14 @@ func exist(board [][]byte, word string) bool {
 }
 
 func backtrack79(board [][]byte, visited [][]bool, i, j, rowLen, columnLen, idx int, word string) bool {
+	if idx == len(word) {
+		return true
+	}
 	if board[i][j] != word[idx] {
 		return false
 	}
 
-	// board[i][j] = word[step] 的情况
+	// board[i][j] = word[idx] 的情况
 
 	if idx == len(word)-1 {
 		return true
@@ -31,22 +34,22 @@ func backtrack79(board [][]byte, visited [][]bool, i, j, rowLen, columnLen, idx 
 
 	visited[i][j] = true // 置为访问
 	res := false
-	if j-1 >= 0 && !visited[i][j-1] {
+	if j-1 >= 0 && !visited[i][j-1] { // 左边
 		if backtrack79(board, visited, i, j-1, rowLen, columnLen, idx+1, word) {
 			res = true
 		}
 	}
-	if !res && j+1 <= columnLen-1 && !visited[i][j+1] {
+	if !res && j+1 <= columnLen-1 && !visited[i][j+1] { // 右边
 		if backtrack79(board, visited, i, j+1, rowLen, columnLen, idx+1, word) {
 			res = true
 		}
 	}
-	if !res && i-1 >= 0 && !visited[i-1][j] {
+	if !res && i-1 >= 0 && !visited[i-1][j] { // 上方
 		if backtrack79(board, visited, i-1, j, rowLen, columnLen, idx+1, word) {
 			res = true
 		}
 	}
-	if !res && i+1 <= rowLen-1 && !visited[i+1][j] {
+	if !res && i+1 <= rowLen-1 && !visited[i+1][j] { // 下方
 		if backtrack79(board, visited, i+1, j, rowLen, columnLen, idx+1, word) {
 			res = true
 		}

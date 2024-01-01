@@ -26,13 +26,13 @@ func traceback52(tables [][]byte, result *int, rowIdx int, n int) {
 		return
 	}
 
-	for i := 0; i < n; i++ {
-		if isValid52(tables, rowIdx, i) {
-			tables[rowIdx][i] = 'Q'
+	for columnIdx := 0; columnIdx < n; columnIdx++ {
+		if isValid52(tables, rowIdx, columnIdx) {
+			tables[rowIdx][columnIdx] = 'Q'
 
 			traceback52(tables, result, rowIdx+1, n)
 
-			tables[rowIdx][i] = '.'
+			tables[rowIdx][columnIdx] = '.'
 		}
 	}
 }
